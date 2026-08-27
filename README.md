@@ -15,7 +15,7 @@ API RESTful desarrollada con **Node.js**, **Express** y **MongoDB** para gestion
 
 ## 📂 Estructura del Proyecto
 
-```text
+
 src/
 ├── config/             # Conexión a la base de datos (db.js)
 ├── controllers/        # Controladores (movimientos, arqueos, cierres)
@@ -81,7 +81,8 @@ JSON
   "metodoPago": "efectivo",
   "descripcion": "Venta turno mañana - panes y facturas",
   "responsable": "Turno Mañana"
-}
+};
+
 
 
 ✨ Author

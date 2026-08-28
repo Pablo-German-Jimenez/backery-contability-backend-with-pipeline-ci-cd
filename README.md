@@ -1,3 +1,5 @@
+Deploy proyecto! https://bakery-accounting-book.netlify.app/
+
 # 🥖 Backend - Sistema de Libro Diario (Panadería)
 
 API RESTful desarrollada con **Node.js**, **Express** y **MongoDB** para gestionar los movimientos contables, ingresos, egresos y balance diario del sistema de administración de la panadería.

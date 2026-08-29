@@ -1,29 +1,51 @@
-name : Frontend CI Pipeline
+name: Backend CI/CD Pipeline
+
 on:
   push:
-    branches: ["main","dev"]
-  pull_request: 
-    branches: ["main","dev"]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-    build-and-test:
-      runs-on: ubuntu-latest
+  test-and-lint:
+    name: Lint & Test
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: Descargar respositorio
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
 
-        - name: Configurar Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 20
-            cache: 'npm'
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
 
-        - name: Instalar dependencias
-          run: npm ci
+      - name: Instalar dependencias
+        run: npm ci
 
-        - name: Validar Linting
-          run: npm run lint
+      - name: Ejecutar Linter
+        run: npm run lint --if-present
 
-        - name: Compilar proyecto (Build)
-          run: npm run build
+      - name: Ejecutar Tests
+        run: npm test --if-present
+        env:
+          NODE_ENV: test
+
+  deploy:
+    name: Deploy to Render
+    needs: test-and-lint
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Disparar despliegue en Render
+        run: |
+          echo "Disparando despliegue hacia Render..."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}")
+          if [ "$STATUS" -eq 200 ] || [ "$STATUS" -eq 201 ]; then
+            echo "Deploy iniciado exitosamente en Render (HTTP $STATUS)."
+          else
+            echo "Error al disparar el hook. Código HTTP: $STATUS"
+            exit 1
+          fi

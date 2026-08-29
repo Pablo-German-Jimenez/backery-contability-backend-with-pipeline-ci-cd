@@ -5,13 +5,13 @@ on:
   pull_request: 
     branches: ["main","dev"]
 
-  job:
+jobs:
     build-and-test:
       runs-on: ubuntu-latest
 
       steps:
         - name: Descargar respositorio
-          uses:actions/checkout@v4
+          uses: actions/checkout@v4
 
         - name: Configurar Node.js
           uses: actions/setup-node@v4

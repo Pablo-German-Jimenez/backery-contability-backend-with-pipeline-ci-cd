@@ -12,4 +12,10 @@ app.get("/api/heath",(req,res)=>{
     res.json({status:"ok",message:"API Panaderia funcionando una maravilla"});
 })
 
+app.get('/',(req,res)=>{
+    res.status(200).json({
+        status:'ok',
+        message:'Backery Contability API corriendo'
+    })
+})
 export default app;

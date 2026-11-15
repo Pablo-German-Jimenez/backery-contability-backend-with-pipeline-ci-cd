@@ -73,6 +73,23 @@ GET /api/balance/historico — Consulta de totales agrupados por rango de fechas
 
 POST /api/caja/cierre — Guardar el balance y cierre de turno/jornada.
 
+💬 Chat de productos (`POST /api/chat`)
+
+El endpoint consulta directamente el catálogo de MongoDB a través del servidor MCP local y la herramienta de solo lectura `buscar_productos`. No requiere iniciar sesión con un agente ni configurar `OPENAI_API_KEY`. Se puede consultar un producto o variedad por nombre, o pedir el catálogo completo. El servidor MCP se inicia automáticamente junto con el backend.
+
+MongoDB es la fuente de verdad del catálogo. Si la colección está vacía, el frontend importa una vez su catálogo local; desde entonces, las altas, modificaciones y eliminaciones se guardan en la API y quedan disponibles para MCP.
+
+El backend requiere `MONGO_URI` para conectarse a MongoDB. Esta URI debe permanecer en el backend y no enviarse al frontend.
+
+Ejemplo de petición:
+
+```json
+{
+  "mensaje": "¿Qué productos tienen disponibles y cuánto cuestan?",
+  "historial": []
+}
+```
+
 📋 Ejemplo de Payload (Nuevo Movimiento)
 JSON
 {

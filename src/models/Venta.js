@@ -7,12 +7,16 @@ const ItemVentaSchema= new mongoose.Schema({
 });
 
 const VentaSchema = new mongoose.Schema(
-    {
-        hora:{type:String,required:true},
+    {        
         total: {type:Number,required:true},
         items:[ItemVentaSchema],
     },
     {timestamps:true}
 );
 
-export default mongoose.model("Venta",VentaSchemaa);
+const horaFormateada = new Date(VentaSchema.createdAt).toLocaleTimeString([,{
+    hour:"2-digit",
+    minute:"2-digit"
+}]);
+
+export default mongoose.model("Venta",VentaSchema);

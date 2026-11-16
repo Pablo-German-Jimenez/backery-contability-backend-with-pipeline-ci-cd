@@ -31,8 +31,8 @@ src/
 Clonar el repositorio:
 
 Bash
-git clone [https://github.com/tu-usuario/libro-diario-panaderia-backend.git](https://github.com/tu-usuario/libro-diario-panaderia-backend.git)
-cd libro-diario-panaderia-backend
+git clone [Backend github repositorio](https://github.com/Pablo-German-Jimenez/backery-contability-backend-with-pipeline-ci-cd)
+
 Instalar dependencias:
 
 Bash
